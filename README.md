@@ -53,6 +53,12 @@ We use snapshot based testing to validate the rendered manifests. If your tests 
 
     make snapshot-update
 
+### Coding conventions
+
+- Follow PEP8 for python
+- Unordered lists should be sorted alphabetrically
+- Store kustomize resources in a `resources` directory, patches in a `patches` directory, etc.
+
 ## Releases
 
 Releases are made automatically by CI on merge. Make sure to use [Conventional Commit](https://www.conventionalcommits.org/) syntax for your commit messages.
