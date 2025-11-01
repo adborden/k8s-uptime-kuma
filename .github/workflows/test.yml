@@ -11,8 +11,25 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Lint
-        run: make lint
+      - name: Install python
+        uses: actions/setup-python@v5
 
-      - name: Test
-        run: make test
+      - name: Install poetry
+        uses: abatilo/actions-poetry@v4
+
+      - name: Configure poetry
+        run: |
+          poetry config virtualenvs.create true --local
+          poetry config virtualenvs.in-project true --local
+
+      - uses: actions/cache@v3
+        name: Cache python dependencies
+        with:
+          path: .venv
+          key: venv-${{ hashFiles('poetry.lock') }}
+
+      - run: poetry install
+
+      - run: make lint
+
+      - run: make test
