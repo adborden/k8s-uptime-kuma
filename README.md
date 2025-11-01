@@ -19,7 +19,7 @@ kind: Kustomization
 namespace: uptime-kuma
 
 resources:
-  - https://github.com/adborden/k8s-uptime-kuma.git/uptime-kuma?ref=0.1.0
+  - https://github.com/adborden/k8s-uptime-kuma.git/uptime-kuma?ref=v1.0.0
 
 images:
   - name: louislam/uptime-kuma
@@ -28,16 +28,31 @@ images:
 
 ## Development
 
+### Requirements
+
+- [poetry](https://python-poetry.org/) 2.x
+- [kustomize](https://kustomize.io/) 5.x
+- [node.js](https://nodejs.org/) LTS
+- [GNU Make](https://www.gnu.org/software/make/)
+
+### Development workflow
+
+Render your manifests for inspection.
+
+    make build
+
 Lint the code.
 
     make lint
 
-Render the Kustomizeation.
+Render the Kustomization.
 
     make test
 
-## Releases
+We use snapshot based testing to validate the rendered manifests. If your tests are failing due to differences, please inspect these carefully. If changes are intentional, update the snapshots.
 
-           ts
+    make snapshot-update
+
+## Releases
 
 Releases are made automatically by CI on merge. Make sure to use [Conventional Commit](https://www.conventionalcommits.org/) syntax for your commit messages.
